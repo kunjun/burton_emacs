@@ -1,0 +1,34 @@
+xcscope -- cscope-15.6-bin-src.tar.bz2
+ecb -- ecb-2.40.zip
+cedet -- cedet-1.0.tar.gz
+doxymacs -- doxymacs-1.8.0.tar.gz
+session -- session-2.3.tar.gz
+
+
+------------------- .emacs -------------------------
+(require 'xcscope) ;;加载xcscope
+;(load-file "D:/HOME/emacs/site-lisp/cedet/common/cedet.el")
+(require 'cedet) ;;加载cedet
+(require 'ecb) ;;加载ecb
+(require 'session) ;;加载session
+(add-hook 'after-init-hook 'session-initialize) ;; 启动时初始化session
+(require 'doxymacs) ;; 启动doxymacs
+(add-hook 'c-mode-common-hook 'doxymacs-mode) ;; 启动doxymacs-mode
+(add-hook 'c++-mode-common-hook 'doxymacs-mode) ;; 启动doxymacs-mode
+(desktop-load-default) ;;读取默认desktop设置
+(desktop-read) ;;读取当前目录保存的desktop设置
+(set-face-background 'default "LightCyan3") ;;设置背景色为 浅青色3
+(set-face-font 'default "-outline-新宋体-normal-r-normal-normal-*-*-96-96-c-*-iso8859-1") ;;设置字体为新宋体 ( Only for windows )
+(global-set-key [f12] 'ecb-activate) ;;定义F12键为激活ecb
+(global-set-key [C-f12] 'ecb-deactivate) ;;定义Ctrl+F12为停止ecb
+(global-set-key [f11] 'delete-other-windows) ;;设置F11为删除其它窗口
+(global-set-key [(meta return)] 'semantic-ia-complete-symbol-menu) ;;设置Alt+Enter为自动补全菜单
+(global-set-key [C-\;] 'ecb-goto-window-edit-last) ;;切换到编辑窗口
+(global-set-key [C-\'] 'ecb-goto-window-methods) ;;切换到函数窗口
+(global-set-key [C-.] 'cscope-find-global-definition) ;;搜索定义
+(global-set-key [C-,] 'cscope-pop-mark) ;; 跳出转向
+;(enable-visual-studio-bookmarks) ;; 启动VS书签子程序
+;;(setq semanticdb-project-roots (list "d:/work")) ;; 设置cemanticdb的扫描根目录
+(add-hook 'c-mode-common-hook ( lambda() ( c-set-style "k&r" ) ) ) ;;设置C语言默认格式
+(add-hook 'c++-mode-common-hook ( lambda() ( c-set-style "k&r" ) ) ) ;;设置C++语言默认格式
+------------------- /.emacs -------------------------
