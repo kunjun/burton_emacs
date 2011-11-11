@@ -55,29 +55,29 @@ If string STR1 is greater, the value is a positive number N;
   (or start1 (setq start1 0))
   (or start2 (setq start2 0))
   (setq end1 (if end1
-                 (min end1 (length str1))
-               (length str1)))
+				 (min end1 (length str1))
+			   (length str1)))
   (setq end2 (if end2
-                 (min end2 (length str2))
-               (length str2)))
+				 (min end2 (length str2))
+			   (length str2)))
   (let ((i1 start1)
-        (i2 start2)
-        result c1 c2)
-    (while (and (not result) (< i1 end1) (< i2 end2))
-      (setq c1 (aref str1 i1)
-            c2 (aref str2 i2)
-            i1 (1+ i1)
-            i2 (1+ i2))
-      (if ignore-case
-          (setq c1 (upcase c1)
-                c2 (upcase c2)))
-      (setq result (cond ((< c1 c2) (- i1))
-                         ((> c1 c2) i1))))
-    (or result
-        (cond ((< i1 end1) (1+ (- i1 start1)))
-              ((< i2 end2) (1- (- start1 i1)))
-              (t)))
-    ))
+		(i2 start2)
+		result c1 c2)
+	(while (and (not result) (< i1 end1) (< i2 end2))
+	  (setq c1 (aref str1 i1)
+			c2 (aref str2 i2)
+			i1 (1+ i1)
+			i2 (1+ i2))
+	  (if ignore-case
+		  (setq c1 (upcase c1)
+				c2 (upcase c2)))
+	  (setq result (cond ((< c1 c2) (- i1))
+						 ((> c1 c2) i1))))
+	(or result
+		(cond ((< i1 end1) (1+ (- i1 start1)))
+			  ((< i2 end2) (1- (- start1 i1)))
+			  (t)))
+	))
 
 )
 
@@ -103,11 +103,11 @@ If string STR1 is greater, the value is a positive number N;
 Unless optional argument INPLACE is non-nil, return a new string."
   (let ((i (length string))
 	(newstr (if inplace string (copy-sequence string))))
-    (while (> i 0)
-      (setq i (1- i))
-      (if (eq (aref newstr i) fromchar)
+	(while (> i 0)
+	  (setq i (1- i))
+	  (if (eq (aref newstr i) fromchar)
 	  (aset newstr i tochar)))
-    newstr))
+	newstr))
 
 )
 
@@ -122,51 +122,51 @@ Copied verbatim from Emacs 23 CVS version subr.el."
 	(start 0)
 	notfirst
 	(list nil))
-    (while (and (string-match rexp string
-			      (if (and notfirst
-				       (= start (match-beginning 0))
-				       (< start (length string)))
+	(while (and (string-match rexp string
+				  (if (and notfirst
+					   (= start (match-beginning 0))
+					   (< start (length string)))
 				  (1+ start) start))
 		(< start (length string)))
-      (setq notfirst t)
-      (if (or keep-nulls (< start (match-beginning 0)))
+	  (setq notfirst t)
+	  (if (or keep-nulls (< start (match-beginning 0)))
 	  (setq list
 		(cons (substring string start (match-beginning 0))
-		      list)))
-      (setq start (match-end 0)))
-    (if (or keep-nulls (< start (length string)))
+			  list)))
+	  (setq start (match-end 0)))
+	(if (or keep-nulls (< start (length string)))
 	(setq list
-	      (cons (substring string start)
-		    list)))
-    (nreverse list)))
+		  (cons (substring string start)
+			list)))
+	(nreverse list)))
 
 (when (not (fboundp 'find-coding-systems-region))
 ;; XEmacs does not currently have `find-coding-systems-region'. Here
 ;; is an emulation, which seems sufficient for CEDET's purposes.
   (defun find-coding-systems-region (begin end)
-    "Mimic Emacs' find-coding-system-region for XEmacs.
+	"Mimic Emacs' find-coding-system-region for XEmacs.
 Return a coding system between BEGIN and END."
-    (if (stringp begin)
+	(if (stringp begin)
 	(if (equal (charsets-in-string begin) '(ascii))
-	    '(undecided)
+		'(undecided)
 	  (delete-if-not
 	   #'(lambda (coding-system)
-	       ;; Assume strings are always short enough that the
-	       ;; condition-case is not worth it.
-	       (query-coding-string begin coding-system t))
+		   ;; Assume strings are always short enough that the
+		   ;; condition-case is not worth it.
+		   (query-coding-string begin coding-system t))
 	 
 	   (remove-duplicates
-	    (append
-	     (get-language-info current-language-environment 'coding-system)
-	     (mapcar #'coding-system-name (coding-system-list)))
-	    :test #'eq :from-end t)))
-      (if (equal (charsets-in-region begin end) '(ascii))
+		(append
+		 (get-language-info current-language-environment 'coding-system)
+		 (mapcar #'coding-system-name (coding-system-list)))
+		:test #'eq :from-end t)))
+	  (if (equal (charsets-in-region begin end) '(ascii))
 	  '(undecided)
 	(delete-if-not
 	 #'(lambda (coding-system)
-	     (condition-case nil
+		 (condition-case nil
 		 (query-coding-region begin end coding-system nil t t)
-	       (text-conversion-error)))
+		   (text-conversion-error)))
 	 (remove-duplicates
 	  (append
 	   (get-language-info current-language-environment 'coding-system)
@@ -177,8 +177,8 @@ Return a coding system between BEGIN and END."
 
 ;;;###autoload
 (if (or (featurep 'xemacs) (inversion-test 'emacs "22.0"))
-    ;; For XEmacs, or older Emacs, we need a new split string.
-    (defalias 'cedet-split-string 'cedet-split-string-1)
+	;; For XEmacs, or older Emacs, we need a new split string.
+	(defalias 'cedet-split-string 'cedet-split-string-1)
   ;; For newer emacs, then the cedet-split-string is the same
   ;; as the built-in one.
   (defalias 'cedet-split-string 'split-string))
@@ -188,32 +188,39 @@ Return a coding system between BEGIN and END."
 (when (not (fboundp 'with-no-warnings))
   (put 'with-no-warnings 'lisp-indent-function 0)
   (defun with-no-warnings (&rest body)
-    "Copied from `with-no-warnings' in Emacs 23.
+	"Copied from `with-no-warnings' in Emacs 23.
 Like `progn', but prevents compiler warnings in the body.
 Note: Doesn't work if this version is being loaded."
-    ;; The implementation for the interpreter is basically trivial.
-    (car (last body))))
+	;; The implementation for the interpreter is basically trivial.
+	(car (last body))))
 
 
+;; -update- #Repair -> "Warning: cedet-called-interactively-p called with 0 arguments, but requires 1"
 (if (not (fboundp 'called-interactively-p))
-    (defmacro cedet-called-interactively-p (&optional arg)
-      "Compat function.  Calls `interactive-p'"
-      '(interactive-p))
-  ;; Else, it is defined, but perhaps too old?
-  (condition-case nil
-      (progn
-	;; This condition case also prevents this from running twice.
-	(called-interactively-p nil)
-	;; An alias for the real deal.
-	(defalias 'cedet-called-interactively-p 'called-interactively-p))
-    (error
-     ;; Create a new one
-     (defmacro cedet-called-interactively-p (&optional arg)
-       "Revised from the built-in version to accept an optional arg."
-       (case (eval arg)
-	 (interactive '(interactive-p))
-	 ((any nil) '(called-interactively-p))))
-     )))
+(defsubst called-interactively-p (&optional arg)
+"Compat function. Calls `interactive-p'"
+(interactive-p))
+;; Else, it is defined, but perhaps too old?
+(condition-case nil
+;; This condition case also prevents this from running twice.
+(called-interactively-p nil)
+(error
+(defvar cedet-compat-called-interactively-p
+(let ((tmp (symbol-function 'called-interactively-p)))
+(if (subrp tmp)
+tmp
+;; Did someone else already override it?
+(or cedet-compat-clled-interactively-p tmp)))
+"Built-in called interactively function.")
+;; Create a new one
+(defun cedet-called-interactively-p (&optional arg)
+"Revised from the built-in version to accept an optional arg."
+(case arg
+(interactive (interactive-p))
+((any nil) (funcall cedet-compat-called-interactively-p))))
+;; Override
+(fset 'called-interactively-p 'cedet-called-interactively-p)
+)))
 
 
 ;;; TESTS
@@ -223,8 +230,8 @@ Note: Doesn't work if this version is being loaded."
   "Test compatability functions."
   (interactive)
   (when (not noninteractive)
-    ;; Interactive tests need to be called interactively.
-    (call-interactively 'cedet-utest-interactivep))
+	;; Interactive tests need to be called interactively.
+	(call-interactively 'cedet-utest-interactivep))
   ;; Other...
   )
 
@@ -232,18 +239,18 @@ Note: Doesn't work if this version is being loaded."
   "Test that `cedet-called-interactively-p' works."
   (interactive)
   (unless (cedet-called-interactively-p 'interactive)
-    (error "Failed interactive test"))
+	(error "Failed interactive test"))
   (unless (cedet-called-interactively-p 'any)
-    (error "Failed interactive any test"))
+	(error "Failed interactive any test"))
   (cedet-utest-interactivep-subfcn)
   (message "All CEDET called-interactively tests pass."))
 
 (defun cedet-utest-interactivep-subfcn ()
   "Test that `cedet-called-interactively-p' works noninteractively."
   (when (cedet-called-interactively-p 'interactive)
-    (error "Failed non-interactive test"))
+	(error "Failed non-interactive test"))
   (when (cedet-called-interactively-p 'any)
-    (error "Failed non-interactive any test")))
+	(error "Failed non-interactive any test")))
 
 (provide 'cedet-compat)
 

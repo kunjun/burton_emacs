@@ -15,3 +15,9 @@
 ;; 或 (set-selection-coding-system 'euc-cn) ;; ps:gbk-unix > euc-cn
 (set-selection-coding-system 'gbk-unix)
 ;;;################### /粘贴剪贴板中文乱码解决 ###################
+
+;;tabbar mode
+(require 'tabbar)
+(tabbar-mode 1)
+(global-set-key [(meta j)] 'tabbar-backward)
+(global-set-key [(meta k)] 'tabbar-forward)

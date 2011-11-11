@@ -27,3 +27,6 @@
 						(length burton-lisp-path-files) 
 						(- load-stop load-start) 
 						(- (time-to-seconds) load-start))))
+						
+
+
