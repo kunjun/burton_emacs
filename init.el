@@ -1,6 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq load-start     (time-to-seconds))
+;; (setq load-start     (time-to-seconds))
+(setq load-start (current-time))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;location of additional packages
@@ -16,17 +17,18 @@
 (setq burton-lisp-path (concat burton-emacs-path "/burton-lisp"))
 (setq burton-lisp-path-files (mapc 'load (directory-files burton-lisp-path t "^[a-zA-Z0-9]*?-.*?\.el$")))
 
-(setq load-stop     (time-to-seconds))
+;; (setq load-stop     (time-to-seconds))
+(setq load-stop (current-time))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;输出加载时间
-(add-hook 'emacs-startup-hook 
-			'(lambda ()
-			   (message "load %d elisp file , spend %g seconds ; startup spend %g seconds" 
-						(length burton-lisp-path-files) 
-						(- load-stop load-start) 
-						(- (time-to-seconds) load-start))))
+;; (add-hook 'emacs-startup-hook 
+			;; '(lambda ()
+			   ;; (message "load %d elisp file , spend %g seconds ; startup spend %g seconds" 
+						;; (length burton-lisp-path-files) 
+						;; (- load-stop load-start) 
+						;; (- (current-time) load-start))))
 						
 
 
