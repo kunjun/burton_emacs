@@ -3,16 +3,16 @@
 ;;(add-to-list 'load-path "~/my_config/site-lisp/")
 
 (require 'xcscope) ;;加载xcscope
-;;(load-file "~/my_config/site-lisp/cedet/common/cedet.el")
+;; (load-file "~/burton_emacs/extend-lisp/cedet/common/cedet.el")
 (require 'cedet) ;;加载cedet
 (require 'ecb) ;;加载ecb
 (require 'session) ;;加载session
 (add-hook 'after-init-hook 'session-initialize) ;; 启动时初始化session
 (require 'doxymacs) ;; 加载doxymacs
-(add-hook 'c-mode-common-hook 'doxymacs-mode) ;; 启动doxymacs-mode
-(add-hook 'c++-mode-common-hook 'doxymacs-mode) ;; 启动doxymacs-mode
-(desktop-load-default) ;;读取默认desktop设置
-(desktop-read) ;;读取当前目录保存的desktop设置
+;; (add-hook 'c-mode-common-hook 'doxymacs-mode) ;; 启动doxymacs-mode
+;; (add-hook 'c++-mode-common-hook 'doxymacs-mode) ;; 启动doxymacs-mode
+;;(desktop-load-default) ;;读取默认desktop设置
+;;(desktop-read) ;;读取当前目录保存的desktop设置
 ;;(set-face-background 'default "LightCyan3") ;;设置背景色为 浅青色3
 ;;(set-face-font 'default "-outline-新宋体-normal-r-normal-normal-*-*-96-96-c-*-iso8859-1") ;;设置字体为新宋体 ( Only for windows )
 ;;-v-:F2 在当前行设置或取消书签 C-F2 查找下一个书签 S-F2 查找上一个书签  C-S-F2 清空当前文件的所有书签 
@@ -166,3 +166,10 @@
 ;;;------------------- /cscope -------------------
 
 ;;;################### /定义各种连招 ###################
+
+
+;;处于c-mode，就用gcc -Wall编译，如果是c++-mode就用 g++ -Wall编译" 
+(require 'smart-compile) ;;加载smart-compile
+(add-to-list 'smart-compile-alist
+		 '(muse-mode . (call-interactively 'muse-project-publish)))
+(global-set-key (kbd "<f7>") 'smart-compile)

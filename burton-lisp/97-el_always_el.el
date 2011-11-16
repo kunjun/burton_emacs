@@ -21,3 +21,26 @@
 (tabbar-mode 1)
 (global-set-key [(meta j)] 'tabbar-backward)
 (global-set-key [(meta k)] 'tabbar-forward)
+
+(require 'redo)
+;;设置F10为撤销
+(global-set-key [f10] 'undo)
+(global-set-key [C-f10] 'redo)
+
+;; Function to copy lines
+;; "C-c w" copy one line, "C-u 5 C-c w" copy 5 lines
+(defun copy-lines(&optional arg)
+(interactive "p")
+(save-excursion
+(beginning-of-line)
+(set-mark (point))
+(if arg
+(next-line (- arg 1)))
+(end-of-line)
+(kill-ring-save (mark) (point))
+)
+)
+;; set key
+(global-set-key (kbd "C-c w") 'copy-lines)
+
+(setq c-mode-hook 'turn-on-font-lock)
