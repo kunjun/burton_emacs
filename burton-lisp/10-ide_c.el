@@ -1,8 +1,10 @@
 ;; -*- c/c++ ide配置 -*-
 
-;;(add-to-list 'load-path "~/my_config/site-lisp/")
+;; (add-to-list 'load-path "~/burton_emacs/extend-lisp/xcscope")
+;; (require 'xcscope) ;;加载xcscope
+;; 或者，你希望只在打开c/c++文件的时候才加载xcscope，可以加入
+;; (add-hook 'c-mode-common-hook '(lambda() (require 'xcscope)))
 
-(require 'xcscope) ;;加载xcscope
 ;; (load-file "~/burton_emacs/extend-lisp/cedet/common/cedet.el")
 (require 'cedet) ;;加载cedet
 (require 'ecb) ;;加载ecb
@@ -14,7 +16,7 @@
 ;;(desktop-load-default) ;;读取默认desktop设置
 ;;(desktop-read) ;;读取当前目录保存的desktop设置
 ;;(set-face-background 'default "LightCyan3") ;;设置背景色为 浅青色3
-;;(set-face-font 'default "-outline-新宋体-normal-r-normal-normal-*-*-96-96-c-*-iso8859-1") ;;设置字体为新宋体 ( Only for windows )
+(set-face-font 'default "-outline-新宋体-normal-r-normal-normal-*-*-96-96-c-*-iso8859-1") ;;设置字体为新宋体 ( Only for windows )
 ;;-v-:F2 在当前行设置或取消书签 C-F2 查找下一个书签 S-F2 查找上一个书签  C-S-F2 清空当前文件的所有书签 
 (enable-visual-studio-bookmarks) ;; 启动VS书签子程序
 ;;(setq semanticdb-project-roots (list "d:/work")) ;; 设置cemanticdb的扫描根目录
@@ -89,6 +91,12 @@
 ;(setq ecb-auto-activate t)
 (setq ecb-tip-of-the-day nil)
 ;;;------------------- /ecb -------------------
+
+
+;;;------------------- cscope -------------------
+;;是否每次查询时更新数据库
+(setq cscope-do-not-update-database t)
+;;;------------------- /cscope -------------------
 
 ;;;################### /各种插件启用与配置 ###################
 
