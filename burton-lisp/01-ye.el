@@ -202,7 +202,7 @@
 ;;使用鼠标中键可以粘贴
 
 (setq user-full-name "BurtonQ")
-(setq user-mail-address "kunjun2010@gmail.com")
+(setq user-mail-address "yourmail@gmail.com")
 ;;设置有用的个人信息,这在很多地方有用。
 
 (setq require-final-newline t)
@@ -408,7 +408,7 @@
 ;;-----------日记设置---------------------
 
 (setq diary-file "~/diary/diary");; 默认的日记文件
-(setq diary-mail-addr "kunjun2010@gmail.com")
+(setq diary-mail-addr "yourmail@gmail.com")
 ;;(add-hook 'diary-hook 'appt-make-list)
 ;;当你创建了一个'~/diary'文件，你就可以使用calendar去查看里面的内容。你可以查看当天的事件，相关命令如下 ：
 ;; d 显示被选中的日期的所有事件
